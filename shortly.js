@@ -50,6 +50,7 @@ function(req, res) {
   }
 
   new Link({ url: uri }).fetch().then(function(found) {
+    console.log("Found is: ", found);
     if (found) {
       res.send(200, found.attributes);
     } else {
@@ -81,25 +82,40 @@ function(req, res) {
 //Signing Up
 
 app.post('/users', function(req, res) {
+  // TODO: pull username and password from client form
+  // TODO: no duplicate usernames
   var user = new User({username: "username", password: "password"});
   user.save()
   .then(function(result) {
-    // user.save();
+    user.save();
     console.log(user);
     res.end();
   });
-  // User.forge({username: "username", password: "password"})
-  //
-    // User.forge({username: "username", password: "password"}).save().then(function(newUser) {
-      //Users.add(newUser);
 
-    //   console.log("These are the attributes of user after the save: ", newUser);
-    //   res.end();
-    // }).catch(function(err) {
-    //   console.log(err);
-    //   res.end();
-    // });
 });
+
+app.post('/login', function(req, res) {
+  new User({username: "username"}).fetch()
+  .then(function(user) {
+    if (user) {
+      user.authenticate("passord", function(authenticated) {
+        if (authenticated) {
+          console.log("Password is correct.");
+        } else {
+          console.log("password is incorrect.");
+        }
+      });
+    } else {
+      console.log("Handle no user");
+    }
+  });
+});
+//
+// app.post /login // We'll have access to username and password
+//  see if user exists
+//    user.authenticate(password)
+//
+
 
 
 /************************************************************/

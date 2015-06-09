@@ -7,7 +7,6 @@ var User = db.Model.extend({
 
   initialize: function() {
     this.hashPassword(function() {
-      this.save();
     }.bind(this));
   },
 
@@ -25,6 +24,12 @@ var User = db.Model.extend({
         cb();
       });
     });
+  },
+
+  authenticate: function(password, callback) {
+    bcrypt.compare(password, this.get('password'), function(err, res) {
+      callback(res);
+    }.bind(this));
   }
 
 });
