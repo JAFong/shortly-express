@@ -111,7 +111,6 @@ app.post('/signup', function(req, res) {
       user.save()
       .then(function(result) {
         user.save();
-        console.log(user);
         res.redirect('/');
       });
     } else {
