@@ -65,7 +65,7 @@ function(req, res) {
   }
 
   new Link({ url: uri }).fetch().then(function(found) {
-    console.log("Found is: ", found);
+    // console.log("Found is: ", found);
     if (found) {
       res.send(200, found.attributes);
     } else {
@@ -106,11 +106,11 @@ app.post('/signup', function(req, res) {
       .then(function(result) {
         user.save();
         console.log(user);
-        res.end();
+        res.redirect('/');
       });
     } else {
       console.log("Please pick another username.");
-      res.end();
+      res.redirect('/signup');
     }
   })
 
@@ -125,17 +125,17 @@ app.post('/login', function(req, res) {
           util.createSession(req, res, function(req, res) {
             console.log("Session Created!");
             console.log(req.session);
-            res.end();
+            res.redirect('/');
           })
           console.log("Password is correct.");
         } else {
           console.log("password is incorrect.");
-          res.end();
+          res.redirect('/login');
         }
       });
     } else {
       console.log("Handle no user");
-      res.end();
+      res.redirect('/signup');
     }
   });
 });
