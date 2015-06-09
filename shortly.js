@@ -2,7 +2,8 @@ var express = require('express');
 var util = require('./lib/utility');
 var partials = require('express-partials');
 var bodyParser = require('body-parser');
-
+var session = require('express-session');
+var cookie = require('cookie-parser');
 
 var db = require('./app/config');
 var Users = require('./app/collections/users');
@@ -16,6 +17,9 @@ var app = express();
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(partials());
+app.use(session({
+  secret: 'keyboard cat'
+}));
 // Parse JSON (uniform resource locators)
 app.use(bodyParser.json());
 // Parse forms (signup/login)
@@ -51,6 +55,7 @@ app.get('/login',
   });
 
 app.post('/links',
+util.checkUser,
 function(req, res) {
   var uri = req.body.url;
 
@@ -117,8 +122,12 @@ app.post('/login', function(req, res) {
     if (user) {
       user.authenticate(req.body.password, function(authenticated) {
         if (authenticated) {
+          util.createSession(req, res, function(req, res) {
+            console.log("Session Created!");
+            console.log(req.session);
+            res.end();
+          })
           console.log("Password is correct.");
-          res.end();
         } else {
           console.log("password is incorrect.");
           res.end();
