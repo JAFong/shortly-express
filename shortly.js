@@ -39,6 +39,16 @@ function(req, res) {
     res.send(200, links.models);
   });
 });
+// Rendering login and signup pages
+app.get('/signup',
+  function(req, res) {
+    res.render('signup');
+  });
+
+app.get('/login',
+  function(req, res) {
+    res.render('login');
+  });
 
 app.post('/links',
 function(req, res) {
