@@ -82,16 +82,23 @@ function(req, res) {
 
 app.post('/users', function(req, res) {
   var user = new User({username: "username", password: "password"});
-  console.log("User in shortly: ", user);
-  user.save().then(function(newUser) {
-    //Users.add(newUser);
-
-    console.log("These are the attributes of user after the save: ", newUser);
-    res.end();
-  }).catch(function(err) {
-    console.log(err);
+  user.save()
+  .then(function(result) {
+    // user.save();
+    console.log(user);
     res.end();
   });
+  // User.forge({username: "username", password: "password"})
+  //
+    // User.forge({username: "username", password: "password"}).save().then(function(newUser) {
+      //Users.add(newUser);
+
+    //   console.log("These are the attributes of user after the save: ", newUser);
+    //   res.end();
+    // }).catch(function(err) {
+    //   console.log(err);
+    //   res.end();
+    // });
 });
 
 
