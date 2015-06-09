@@ -54,6 +54,12 @@ app.get('/login',
     res.render('login');
   });
 
+app.get('/logout',
+  function(req, res) {
+    req.session.destroy();
+    res.redirect('/login');
+  });
+
 app.post('/links',
 util.checkUser,
 function(req, res) {
