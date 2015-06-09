@@ -81,32 +81,42 @@ function(req, res) {
 
 //Signing Up
 
-app.post('/users', function(req, res) {
+app.post('/signup', function(req, res) {
   // TODO: pull username and password from client form
-  // TODO: no duplicate usernames
-  var user = new User({username: "username", password: "password"});
-  user.save()
-  .then(function(result) {
-    user.save();
-    console.log(user);
-    res.end();
-  });
+  new User({username: req.body.username}).fetch()
+  .then(function(found) {
+    if (!found) {
+      var user = new User({username: req.body.username, password: req.body.password});
+      user.save()
+      .then(function(result) {
+        user.save();
+        console.log(user);
+        res.end();
+      });
+    } else {
+      console.log("Please pick another username.");
+      res.end();
+    }
+  })
 
 });
 
 app.post('/login', function(req, res) {
-  new User({username: "username"}).fetch()
+  new User({username: req.body.username}).fetch()
   .then(function(user) {
     if (user) {
-      user.authenticate("passord", function(authenticated) {
+      user.authenticate(req.body.password, function(authenticated) {
         if (authenticated) {
           console.log("Password is correct.");
+          res.end();
         } else {
           console.log("password is incorrect.");
+          res.end();
         }
       });
     } else {
       console.log("Handle no user");
+      res.end();
     }
   });
 });
