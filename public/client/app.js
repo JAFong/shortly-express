@@ -15,7 +15,7 @@ window.Shortly = Backbone.View.extend({
 
     this.router = new Shortly.Router({ el: this.$el.find('#container') });
     this.router.on('route', this.updateNav, this);
-
+    Backbone.on('userLogIn', this.renderIndexView, this);
     Backbone.history.start({ pushState: true });
   },
 
