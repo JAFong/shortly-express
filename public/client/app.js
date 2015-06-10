@@ -9,6 +9,7 @@ window.Shortly = Backbone.View.extend({
   },
 
   initialize: function(){
+    console.log(Templates);
     console.log( 'Shortly is running' );
     $('body').append(this.render().el);
 
@@ -33,15 +34,15 @@ window.Shortly = Backbone.View.extend({
     this.router.navigate('/create', { trigger: true });
   },
 
-  // renderLoginView: function(e){
-  //   e && e.preventDefault();
-  //   this.router.navigate('/login', { trigger: true });
-  // },
+  renderLoginView: function(e){
+    e && e.preventDefault();
+    this.router.navigate('/login', { trigger: true });
+  },
 
-  // renderSignUpView: function(e){
-  //   e && e.preventDefault();
-  //   this.router.navigate('/signup', { trigger: true });
-  // },
+  renderSignUpView: function(e){
+    e && e.preventDefault();
+    this.router.navigate('/signup', { trigger: true });
+  },
 
   updateNav: function(routeName){
     this.$el.find('.navigation li a')

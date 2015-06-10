@@ -1,13 +1,13 @@
-Shortly.LoginView = Backbone.View.extend({
-  className: 'login',
+Shortly.SignView = Backbone.View.extend({
+  className: 'signup',
 
-  template: Templates['login'],
+  template: Templates['signup'],
 
   initialize: function() {
     console.log('initializing loginview')
   },
   render: function() {
-    console.log('rendering loginView');
+    console.log('rendering signInView');
     this.$el.html(this.template());
     return this;
   }

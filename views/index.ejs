@@ -3,8 +3,8 @@
   <ul>
     <li><a href='#' class='index'>All Links</a></li>
     <li><a href='#' class='create'>Shorten</a></li>
-    <li><a href='/login' class='login'>Login</a></li>
-    <li><a href='/signup' class='signup'>Sign Up</a></li>
+    <li><a href='#' class='login'>Login</a></li>
+    <li><a href='#' class='signup'>Sign Up</a></li>
     <li><a href='/logout' class='signup'>Log Out</a></li>
   </ul>
   </div>
@@ -32,6 +32,38 @@
   <div class='message'></div>
 </script>
 
+<script id='login' type='text/x-handlebars-template'>
+  <form action="/login" method="post">
+      <div>
+        <label for="username">Username:</label>
+        <input id="username" type="text" name="username">
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input id="password" type="password" name="password">
+      </div>
+      <div>
+        <input type="submit" value="Login">
+      </div>
+  </form>
+</script>
+
+<script id='signup' type='text/x-handlebars-template'>
+  <form action="/signup" method="post">
+    <div>
+      <label for="username">Username:</label>
+      <input id="username" type="text" name="username">
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input id="password" type="password" name="password">
+    </div>
+    <div>
+      <input type="submit" value="Sign up">
+    </div>
+</form>
+</script>
+
 <script>
   $(function(){
     new Shortly();
@@ -48,5 +80,7 @@
 <script src='/client/links.js'></script>
 <script src='/client/linkView.js'></script>
 <script src='/client/linksView.js'></script>
+<script src='/client/loginView.js'></script>
+<script src='/client/signUpView.js'></script>
 <script src='/client/createLinkView.js'></script>
 <script src='/client/router.js'></script>
